@@ -1,5 +1,6 @@
 {
   "name": "@tommybez/dbt-semantic-layer-mcp-server",
+  "packageManager": "pnpm@9.14.2",
   "version": "0.1.0",
   "description": "MCP server for using the DBT Semantic Layer API",
   "license": "MIT",
