@@ -3,15 +3,18 @@ startCommand:
   type: stdio
   configSchema:
     # JSON Schema defining the configuration options for the MCP.
-    {
-      "type": "object",
-      "properties": {
-        "SEMANTIC_LAYER_API_KEY": { "type": "string" },
-        "SEMANTIC_LAYER_URL": { "type": "string" },
-        "SEMANTIC_LAYER_ENVIRONMENT_ID": { "type": "string" }
-      },
-      "required": ["SEMANTIC_LAYER_API_KEY", "SEMANTIC_LAYER_URL", "SEMANTIC_LAYER_ENVIRONMENT_ID"]
-    }
+    type: object
+    properties:
+      SEMANTIC_LAYER_API_KEY:
+        type: string
+      SEMANTIC_LAYER_URL:
+          "type": "string" 
+      SEMANTIC_LAYER_ENVIRONMENT_ID:
+        type: string
+    required:
+      - SEMANTIC_LAYER_API_KEY
+      - SEMANTIC_LAYER_URL
+      - SEMANTIC_LAYER_ENVIRONMENT_ID
   commandFunction:
     # A function that produces the CLI command to start the MCP on stdio.
     |-
