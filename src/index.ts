@@ -15,4 +15,10 @@ server.addResource({
     }
   })
 
-server.start()
+  server.start({
+    transportType: "sse",
+    sse: {
+      endpoint: "/sse",
+      port: 8080,
+    },
+  });
