@@ -1,7 +1,7 @@
-import { graphql } from '../../graphql/gql.js'
+import { graphql } from '../../graphql/gql'
 import { QueryClient } from '@tanstack/react-query'
-import type { MutationCreateQueryArgs } from '../../graphql/graphql.js'
-import { execute } from '../utils.js'
+import type { MutationCreateQueryArgs } from '../../graphql/graphql'
+import { execute } from '../utils'
 
 interface DbtGraphQLClientConfig {
   apiKey: string

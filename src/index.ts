@@ -1,5 +1,5 @@
 import { LiteMCP } from "litemcp";
-import { encodedApiDocs } from './docs/index.js'
+import { encodedApiDocs } from './docs'
 
 const server = new LiteMCP('dbt-semantic-layer-mcp', '0.1.0')
 

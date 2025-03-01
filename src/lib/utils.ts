@@ -1,4 +1,4 @@
-import type { TypedDocumentString } from '../graphql/graphql.js'
+import type { TypedDocumentString } from '../graphql/graphql'
 
 export async function execute<TResult, TVariables>(
   query: TypedDocumentString<TResult, TVariables>,
