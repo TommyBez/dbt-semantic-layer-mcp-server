@@ -15,6 +15,8 @@ if(!process.env.SEMANTIC_LAYER_ENVIRONMENT_ID) {
   throw new Error('SEMANTIC_LAYER_ENVIRONMENT_ID is not set')
 }
 
+const dbtClient = getDbtClient()
+
 
 server.addResource({
     uri: 'file:///docs.txt',
@@ -35,7 +37,7 @@ server.addResource({
       'Invoke this tool prior to creating a query to get a list of metrics to use in the query.',
       parameters: z.object({}),
     execute: async () => {
-      const results = await getDbtClient().fetchMetrics();
+      const results = await dbtClient.fetchMetrics();
       return {
         content: [{ type: "text", text: JSON.stringify(results) }],
         isError: false,
@@ -60,7 +62,7 @@ server.addResource({
       })),
     }),
     execute: async (args) => {
-      const results = await getDbtClient().createQuery(args);
+      const results = await dbtClient.createQuery(args);
       return {
         content: [{ type: "text", text: JSON.stringify(results) }],
         isError: false,
@@ -75,7 +77,7 @@ server.addResource({
       queryId: z.string(),
     }),
     execute: async (args) => {
-      const results = await getDbtClient().getQueryResult(args.queryId);
+      const results = await dbtClient.getQueryResult(args.queryId);
       return {
         content: [{ type: "text", text: JSON.stringify(results) }],
         isError: false,
