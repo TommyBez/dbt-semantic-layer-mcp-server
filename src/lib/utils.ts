@@ -4,7 +4,13 @@ export async function execute<TResult, TVariables>(
   query: TypedDocumentString<TResult, TVariables>,
   ...[variables]: TVariables extends Record<string, never> ? [] : [TVariables]
 ) {
-  const response = await fetch(process.env.SEMANTIC_LAYER_URL!, {
+  if (!process.env.SEMANTIC_LAYER_URL) {
+    throw new Error('SEMANTIC_LAYER_URL must be set')
+  }
+  if (!process.env.SEMANTIC_LAYER_API_KEY) {
+    throw new Error('SEMANTIC_LAYER_API_KEY must be set')
+  }
+  const response = await fetch(process.env.SEMANTIC_LAYER_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
