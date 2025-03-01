@@ -26,12 +26,13 @@ server.addResource({
     }
   })
 
+
   
 
   server.start({
     transportType: "sse",
     sse: {
       endpoint: "/sse",
-      port: 8080,
+      port: process.env.PORT ? parseInt(process.env.PORT) : 8080,
     },
   });
