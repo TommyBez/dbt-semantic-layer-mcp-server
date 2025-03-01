@@ -5,7 +5,7 @@
   "description": "MCP server for using the DBT Semantic Layer API",
   "license": "MIT",
   "author": "TommyBez",
-  "type": "module",
+  "type": "commonjs",
   "bin": {
     "mcp-server-dbt-semantic-layer": "dist/index.js"
   },
