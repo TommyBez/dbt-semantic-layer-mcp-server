@@ -30,9 +30,5 @@ server.addResource({
   
 
   server.start({
-    transportType: "sse",
-    sse: {
-      endpoint: "/sse",
-      port: process.env.PORT ? parseInt(process.env.PORT) : 8080,
-    },
+    transportType: "stdio"
   });
