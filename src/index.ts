@@ -3,6 +3,17 @@ import { encodedApiDocs } from './docs'
 
 const server = new LiteMCP('dbt-semantic-layer-mcp', '0.1.0')
 
+if(!process.env.SEMANTIC_LAYER_API_KEY) {
+  throw new Error('SEMANTIC_LAYER_API_KEY is not set')
+}
+if(!process.env.SEMANTIC_LAYER_URL) {
+  throw new Error('SEMANTIC_LAYER_URL is not set')
+}
+if(!process.env.SEMANTIC_LAYER_ENVIRONMENT_ID) {
+  throw new Error('SEMANTIC_LAYER_ENVIRONMENT_ID is not set')
+}
+
+
 server.addResource({
     uri: 'file:///docs.txt',
     name: 'documentation',
@@ -14,6 +25,8 @@ server.addResource({
       }
     }
   })
+
+  
 
   server.start({
     transportType: "sse",
