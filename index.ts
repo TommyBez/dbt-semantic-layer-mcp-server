@@ -14,3 +14,5 @@ server.addResource({
       }
     }
   })
+
+server.start()
