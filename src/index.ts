@@ -223,14 +223,14 @@ The dbt Semantic Layer MCP Server provides a convenient way to interact with the
       'Returns the query id which can be used to fetch the results of the query.',
     parameters: z.object({
       metrics: z.array(z.object({ name: z.string() })),
-      groupBy: z.array(z.object({ name: z.string() })),
-      where: z.array(z.object({ sql: z.string() })),
-      limit: z.number(),
+      groupBy: z.array(z.object({ name: z.string() })).optional(),
+      where: z.array(z.object({ sql: z.string() })).optional(),
+      limit: z.number().optional(),
       orderBy: z.array(z.object({
         descending: z.boolean(),
         groupBy: z.object({ name: z.string() }),
         metric: z.object({ name: z.string() }),
-      })),
+      })).optional(),
     }),
     execute: async (args) => {
       try {
