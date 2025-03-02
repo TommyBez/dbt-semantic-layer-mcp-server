@@ -10,6 +10,7 @@ export async function execute<TResult, TVariables>(
   if (!process.env.SEMANTIC_LAYER_API_KEY) {
     throw new Error('SEMANTIC_LAYER_API_KEY must be set')
   }
+
   const response = await fetch(process.env.SEMANTIC_LAYER_URL, {
     method: 'POST',
     headers: {
@@ -27,5 +28,7 @@ export async function execute<TResult, TVariables>(
     throw new Error('Network response was not ok')
   }
 
-  return response.json() as TResult
+  const {data} = await response.json()
+
+  return data as TResult
 }

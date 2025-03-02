@@ -2,7 +2,7 @@ import { LiteMCP } from "litemcp";
 import { getDbtClient } from "./lib/dbt/client";
 import { z } from "zod";
 
-const server = new LiteMCP('dbt-semantic-layer-mcp', '0.1.0')
+const server = new LiteMCP('dbt-semantic-layer-mcp', '0.1.2')
 
 if(!process.env.SEMANTIC_LAYER_API_KEY) {
   throw new Error('SEMANTIC_LAYER_API_KEY is not set')
@@ -208,6 +208,7 @@ The dbt Semantic Layer MCP Server provides a convenient way to interact with the
       parameters: z.object({}),
     execute: async () => {
       const results = await dbtClient.fetchMetrics();
+      server.logger.info('results', { results})
       return {
         content: [{ type: "text", text: JSON.stringify(results) }],
         isError: false,

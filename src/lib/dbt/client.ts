@@ -4,8 +4,6 @@ import type { MutationCreateQueryArgs } from '../../graphql/graphql'
 import { execute } from '../utils'
 
 interface DbtGraphQLClientConfig {
-  apiKey: string
-  baseURL: string
   environmentId: string
 }
 
@@ -115,12 +113,10 @@ let dbtClient: DbtGraphQLClient | null = null
 
 export const getDbtClient = () => {
   if (!dbtClient) {
-    if (!process.env.SEMANTIC_LAYER_API_KEY || !process.env.SEMANTIC_LAYER_URL || !process.env.SEMANTIC_LAYER_ENVIRONMENT_ID) {
-      throw new Error('SEMANTIC_LAYER_API_KEY, SEMANTIC_LAYER_URL, and SEMANTIC_LAYER_ENVIRONMENT_ID must be set')
+    if (!process.env.SEMANTIC_LAYER_ENVIRONMENT_ID) {
+      throw new Error('SEMANTIC_LAYER_ENVIRONMENT_ID must be set')
     }
     dbtClient = new DbtGraphQLClient({
-      apiKey: process.env.SEMANTIC_LAYER_API_KEY,
-      baseURL: process.env.SEMANTIC_LAYER_URL,
       environmentId: process.env.SEMANTIC_LAYER_ENVIRONMENT_ID,
     })
   }
