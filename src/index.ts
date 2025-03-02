@@ -208,7 +208,7 @@ The dbt Semantic Layer MCP Server provides a convenient way to interact with the
       parameters: z.object({}),
     execute: async () => {
       const results = await dbtClient.fetchMetrics();
-      server.logger.info('results', { results})
+      
       return {
         content: [{ type: "text", text: JSON.stringify(results) }],
         isError: false,
