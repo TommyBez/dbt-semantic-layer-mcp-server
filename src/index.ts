@@ -2,7 +2,7 @@ import { LiteMCP } from "litemcp";
 import { getDbtClient } from "./lib/dbt/client";
 import { z } from "zod";
 
-const server = new LiteMCP('dbt-semantic-layer-mcp', '0.1.2')
+const server = new LiteMCP('dbt-semantic-layer-mcp', '0.1.3')
 
 if(!process.env.SEMANTIC_LAYER_API_KEY) {
   throw new Error('SEMANTIC_LAYER_API_KEY is not set')
