@@ -71,4 +71,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Acknowledgments
 
 - [dbt Labs](https://www.getdbt.com/) for creating the dbt Semantic Layer
-- [Smithery](https://smithery.ai/) for the MCP server framework
+- [Smithery](https://smithery.ai/) for the MCP deployment platform
+- [LiteMCP](https://github.com/wong2/litemcp) for the MCP development package 
