@@ -1,5 +1,5 @@
 import { LiteMCP } from "litemcp";
-import { encodedApiDocs } from './docs'
+import { encodedApiDocs, apiDocs } from './docs'
 import { getDbtClient } from "./lib/dbt/client";
 import { z } from "zod";
 
@@ -18,15 +18,15 @@ if(!process.env.SEMANTIC_LAYER_ENVIRONMENT_ID) {
 const dbtClient = getDbtClient()
 
 
-server.addResource({
-    uri: 'file:///docs.txt',
-    name: 'documentation',
-    description: 'Semantic Layer GraphQL API documentation. IMPORTANT: Read this prior to make any query',
-    mimeType: 'application/octet-stream',
-    load: async () => {
+  server.addTool({
+    name: 'get_documentation',
+    description: 'Get help about the semantic layer API. EVERY TIME you get an error, invoke this tool to get more information about how to use the semantic layer.',
+    parameters: z.object({}),
+    execute: async () => {
       return {
-        blob: encodedApiDocs
-      }
+        content: [{ type: "text", text: apiDocs }],
+        isError: false,
+      };
     }
   })
 
@@ -72,7 +72,7 @@ server.addResource({
   
   server.addTool({
     name: 'fetch_query_result',
-    description: 'Fetches the results of a query from the semantic layer.',
+    description: 'Fetches the results of a query from the semantic layer. You have to poll this tool until the query status is SUCCESSFUL.',
     parameters: z.object({
       queryId: z.string(),
     }),
@@ -80,7 +80,7 @@ server.addResource({
       const results = await dbtClient.getQueryResult(args.queryId);
       return {
         content: [{ type: "text", text: JSON.stringify(results) }],
-        isError: false,
+        isError: results.error ? true : false,
       };
     }
   })
