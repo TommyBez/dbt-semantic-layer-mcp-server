@@ -1,5 +1,4 @@
 import { LiteMCP } from "litemcp";
-import { encodedApiDocs, apiDocs } from './docs'
 import { getDbtClient } from "./lib/dbt/client";
 import { z } from "zod";
 
