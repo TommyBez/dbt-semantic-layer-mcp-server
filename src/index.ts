@@ -233,11 +233,19 @@ The dbt Semantic Layer MCP Server provides a convenient way to interact with the
       })),
     }),
     execute: async (args) => {
-      const results = await dbtClient.createQuery(args);
-      return {
-        content: [{ type: "text", text: JSON.stringify(results) }],
-        isError: false,
-      };
+      try {
+        const results = await dbtClient.createQuery(args);
+        return {
+          content: [{ type: "text", text: JSON.stringify(results) }],
+          isError: false,
+        };
+      } catch (error) {
+        server.logger.error('error', { error })
+        return {
+          content: [{ type: "text", text: 'An error occurred while creating the query. Please call get_documentation to understand how to use the tool.' }],
+          isError: true,
+        };
+      }
     }
   })
   
@@ -248,11 +256,19 @@ The dbt Semantic Layer MCP Server provides a convenient way to interact with the
       queryId: z.string(),
     }),
     execute: async (args) => {
-      const results = await dbtClient.getQueryResult(args.queryId);
-      return {
-        content: [{ type: "text", text: JSON.stringify(results) }],
-        isError: results.error ? true : false,
-      };
+      try {
+        const results = await dbtClient.getQueryResult(args.queryId);
+        return {
+          content: [{ type: "text", text: JSON.stringify(results) }],
+          isError: results.error ? true : false,
+        };
+      } catch (error) {
+        server.logger.error('error', { error })
+        return {
+          content: [{ type: "text", text: 'An error occurred while fetching the query results. Please call get_documentation to understand how to use the tool.' }],
+          isError: true,
+        };
+      }
     }
   })
   
