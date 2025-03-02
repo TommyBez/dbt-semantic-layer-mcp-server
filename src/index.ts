@@ -242,7 +242,7 @@ The dbt Semantic Layer MCP Server provides a convenient way to interact with the
       } catch (error) {
         server.logger.error('error', { error })
         return {
-          content: [{ type: "text", text: 'An error occurred while creating the query. Please call get_documentation to understand how to use the tool.' }],
+          content: [{ type: "text", text: 'An error occurred while creating the query. Please call get_documentation to understand how to use the tool. Error: ' + error }],
           isError: true,
         };
       }
@@ -265,7 +265,7 @@ The dbt Semantic Layer MCP Server provides a convenient way to interact with the
       } catch (error) {
         server.logger.error('error', { error })
         return {
-          content: [{ type: "text", text: 'An error occurred while fetching the query results. Please call get_documentation to understand how to use the tool.' }],
+          content: [{ type: "text", text: 'An error occurred while fetching the query results. Please call get_documentation to understand how to use the tool. Error: ' + error }],
           isError: true,
         };
       }
